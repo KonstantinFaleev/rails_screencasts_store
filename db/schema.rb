@@ -17,8 +17,11 @@ ActiveRecord::Schema.define(version: 20180105201824) do
     t.string "name"
     t.boolean "real"
     t.float "weight"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_items_on_name"
+    t.index ["price"], name: "index_items_on_price"
   end
 
 end
