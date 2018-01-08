@@ -23,16 +23,27 @@ class ItemsController < ApplicationController
 
   # /items POST
   def create
-    @item = Item.create(params[:item])
-    if @item.errors.empty?
-      redirect_to item_path(@item)
-    else
-      render "new"
-    end
+    @item = Item.create(item_params)
+      if @item.errors.empty?
+        redirect_to item_path(@item)
+      else
+        render "new"
+      end
+
+   # @item = Item.create(params[:item])
+    #if @item.errors.empty?
+     # redirect_to item_path(@item)
+    #else
+      #render "new"
+    #end
   end
 
   #/items DELETE
   def destroy
 
+  end
+
+  def item_params
+    params.permit(:name, :price, :real, :weight, :description)
   end
 end
