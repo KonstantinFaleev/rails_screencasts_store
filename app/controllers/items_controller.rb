@@ -1,10 +1,15 @@
 class ItemsController < ApplicationController
 
-  before_action :find_item, only: [:show, :edit, :update, :destroy]
+  before_action :find_item, only: [:show, :edit, :update, :destroy, :upvote]
   before_action :chack_if_admin, only: [:edit, :update, :new, :create, :destroy]
 
   def index
     @items = Item.all
+  end
+
+  def expensive
+    @items = Item.where("price > 1000")
+    render "index"
   end
 
   # /items/1 GET
@@ -58,6 +63,11 @@ class ItemsController < ApplicationController
     redirect_to action: "index"
   end
 
+  def upvote
+    @item.increment!(:votes_count)
+    redirect_to action: :index
+  end
+
   private
 
   def find_item
@@ -69,6 +79,6 @@ class ItemsController < ApplicationController
   end
 
   def chack_if_admin
-    render text: "Access denied", status: 403 unkess params[:admin]
+    #render text: "Access denied", status: 403 unkess params[:admin]
   end
 end
