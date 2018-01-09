@@ -71,14 +71,13 @@ class ItemsController < ApplicationController
   private
 
   def find_item
-    @item = Item.find(params[:id])
+    @item = Item.where(id: params[:id]).first
+    render_404 unless @item
   end
 
   def item_params
     params.permit(:name, :price, :real, :weight, :description)
   end
 
-  def chack_if_admin
-    #render text: "Access denied", status: 403 unkess params[:admin]
-  end
+
 end
