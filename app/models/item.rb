@@ -2,7 +2,9 @@ class Item < ApplicationRecord
   validates :price, numericality: { greater_than: 0, allow_nil: true }
   validates :name, :description, presence: true
 s
-  has_and_belongs_to_many :carts
+  #has_and_belongs_to_many :carts
+  has_many :carts, through: :positions
+  has_many :positions
   #belongs_to :category
 
   #after_initialize { puts "initialized" } # Item.new; Item.first
