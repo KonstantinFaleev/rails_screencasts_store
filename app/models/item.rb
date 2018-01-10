@@ -5,6 +5,8 @@ s
   #has_and_belongs_to_many :carts
   has_many :carts, through: :positions
   has_many :positions
+
+  has_many :comments, as: :commentable
   #belongs_to :category
 
   #after_initialize { puts "initialized" } # Item.new; Item.first
